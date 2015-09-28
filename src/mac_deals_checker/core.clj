@@ -33,7 +33,12 @@
 
 ;; Works using reaver
 ;; jsoup selector ref http://jsoup.org/apidocs/org/jsoup/select/Selector.html
+;; //*[@id="primary"]/div[2]/div[2]/table[1]/tbody/tr/td[2]/text()[1]
+;; //*[@id="primary"]/div[2]/div[2]/table[1]/tbody/tr/td[2]/text()[3]
 (defn latest-deals-info
   []
-  (-> deal-url slurp parse (extract-from ".product" [:title :spec :price] "td.specs h3" text "td.specs:nth-child(n+2)" text "span.current_price span span" text)))
+  (-> deal-url slurp parse (extract-from ".product" [:title :spec :price]
+                                         "td.specs h3" text
+                                         "td.specs" text
+                                         "span.current_price span span" text)))
 
